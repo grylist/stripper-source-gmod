@@ -14,6 +14,10 @@
 
 #include <platform.h>
 
+#if __x86_64__
+    #include <cassert>
+#endif
+
 #include <GarrysMod/Lua/Interface.h>
 
 #include <pcre.h>
