@@ -7,7 +7,7 @@ Awfully integrates Stripper:Source into Garry's Mod with the help of [garrysmod_
 
 Libraries and .vdf files by default should be putted in garrysmod/addons/ folder, you can change a directory, but you'll need to update .vdf files.
 
-This plugin wont work in singleplayer, because, as far as i know, server plugins can't be loaded there.
+This plugin **wont work in singleplayer**, because, as far as i know, server plugins can't be loaded there.
 
 Has an optional FIX_MISSING_KEYS, which you can define to fix 2 entity keys, see [parser.cpp][4]. **Disabled by default**
 
