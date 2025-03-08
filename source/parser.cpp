@@ -11,12 +11,11 @@
 
 #include <cctype>
 #include <cstring>
-
-#include <platform.h>
-
-#if __x86_64__
+#ifdef __x86_64__
     #include <cassert>
 #endif
+
+#include <platform.h>
 
 #include <GarrysMod/Lua/Interface.h>
 

@@ -1,7 +1,7 @@
 # gmsv_stripper
 Stripper:Source for Garry's Mod
 
-Based on original [stripper-source][1] and [gm_stripper_lib][2] to be standalone binary module for Garry's mod with extra LUA interface exposed for easier debugging.
+Based on original [stripper-source][1] and [gm_stripper_lib][2].
 
 Awfully integrates Stripper:Source into Garry's Mod with the help of [garrysmod_common][3] for extra definitions.
 
@@ -13,7 +13,7 @@ Has an optional FIX_MISSING_KEYS, which you can define to fix 2 entity keys, see
 
 ### Commands
 
-`stripper_status` - Checks stripper status. Flags - FCVAR_SERVER_CAN_EXECUTE
+`stripper_status` - Checks stripper status and prints out all applied files. Flags - FCVAR_SERVER_CAN_EXECUTE
 
 ## Compiling
 
