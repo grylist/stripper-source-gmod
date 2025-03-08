@@ -20,6 +20,9 @@
 
 #include "parser.hpp"
 
+// Uncomment if needed
+// #define FIX_MISSING_KEYS
+
 void f_strncpy_s(char *dest, const char *str, size_t n)
 {
     while (
@@ -453,6 +456,14 @@ void Stripper::_BuildPropList()
     size_t _keysize = 0;
     size_t _valsize = 0;
 
+#ifdef FIX_MISSING_KEYS
+    // Some entities are missing some keys for any reason, i'll fix this only for what i need
+    bool bMissingKey = false;
+    bool bFoundMissingKey = false;
+    const char *missing_key;
+    const char *missing_value;
+#endif
+
     bool in_block = false;
     std::list<std::string *>::iterator iter, end=m_lines.end();
     std::string *s;
@@ -473,6 +484,18 @@ void Stripper::_BuildPropList()
              * and push it onto the block list
              */
             in_block = false;
+#ifdef FIX_MISSING_KEYS
+            // Some entities are missing some keys for any reason, i'll fix this only for what i need
+            if (bMissingKey && !bFoundMissingKey)
+            {
+                ent_prop *e = AllocProp();
+
+                e->key.assign(missing_key);
+                e->val.assign(missing_value);
+                cl->push_back(e);
+            }
+            bMissingKey = bFoundMissingKey = false;
+#endif
             m_props.push_back(cl);
             cl = NULL;
             if (*(s->c_str() + 1) == '{')
@@ -512,6 +535,33 @@ void Stripper::_BuildPropList()
 #endif
                     e->key.assign(_key);
                     e->val.assign(_val);
+
+#ifdef FIX_MISSING_KEYS
+                    // In reality, because of entity properties order, we knew about founded missing key before bMissingKey was even set
+                    if (stricmp(_key, "scale") == 0 || stricmp(_key, "massscale") == 0)
+                    {
+                        bFoundMissingKey = true;
+                    }
+
+                    if (!bMissingKey)
+                    {
+                        if (stricmp(_val, "env_sprite") == 0)
+                        {
+                            missing_key = "scale";
+                            missing_value = "0.25";
+
+                            bMissingKey = true;
+                        }
+                        else if (strncmp(_val, "prop_physics", 12) == 0)
+                        {
+                            missing_key = "massscale";
+                            missing_value = "0";
+
+                            bMissingKey = true;
+                        }
+                    }
+#endif                    
+
                     cl->push_back(e);
                 }
             }
@@ -705,8 +755,8 @@ void Stripper::ApplyFileFilter(const char *file)
                     re = pcre_compile(&(_val[1]), PCRE_CASELESS, &error, &err_offs, NULL);
                     if (!re)
                     {
-                        Msg("[gmsv_stripper] File %s parse error (line %d):\n", file, line);
-                        Msg("[gmsv_stripper] Expression(%s): At pos %d, %s\n", _val, err_offs, error);
+                        Msg("[Stripper Plugin] File %s parse error (line %d):\n", file, line);
+                        Msg("[Stripper Plugin] Expression(%s): At pos %d, %s\n", _val, err_offs, error);
                         continue;
                     }
                 }

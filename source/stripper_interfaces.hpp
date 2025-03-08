@@ -15,11 +15,7 @@
 #define _INCLUDE_STRIPPER_MAIN_H_
 
 class IServerGameDLL;
-class IServer;
-class IVEngineServer;
 
 extern IServerGameDLL *gamedll;
-extern IServer *server;
-extern IVEngineServer *engine;
 
 #endif /* _INCLUDE_STRIPPER_MAIN_H_ */

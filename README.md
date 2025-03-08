@@ -5,7 +5,9 @@ Based on original [stripper-source][1] and [gm_stripper_lib][2] to be standalone
 
 Awfully integrates Stripper:Source into Garry's Mod with the help of [garrysmod_common][3] for extra definitions.
 
-BUG: Due to load order of Garry's mod binary modules, stripper will kick in only on next map load.
+Libraries and .vdf files by default should be putted in garrysmod/addons/ folder, you can change a directory, but you'll need to update .vdf files.
+
+This plugin wont work in singleplayer, because, as far as i know, server plugins can't be loaded there.
 
 ## Compiling
 

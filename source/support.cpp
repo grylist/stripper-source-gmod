@@ -21,6 +21,8 @@
 #include <unistd.h>
 #endif
 
+#include <vector>
+
 #include <GarrysMod/Lua/Interface.h>
 
 #include "parser.hpp"
@@ -87,9 +89,7 @@ namespace StripperSupport {
 	}
 
 	Stripper g_Stripper;
-
-    const char* originalMapEntities;
-    const char* newMapEntities;
+	std::vector<std::string> AppliedFiles; // Stores all applied files
 
 	const char*
 	parse_map(const char* map, const char* entities)
@@ -98,6 +98,7 @@ namespace StripperSupport {
 		char path[256];
 
 		g_Stripper.SetEntityList(entities);
+		AppliedFiles.clear(); // Empty when new map
 
 		path_format(path,
 			sizeof(path),
@@ -107,13 +108,14 @@ namespace StripperSupport {
 		fp = fopen(path, "rt");
 		if (fp == NULL)
 		{
-			Msg("[gmsv_stripper] Could not find global filter file: %s\n", path);
+			Msg("[Stripper Plugin] Could not find global filter file: %s\n", path);
 		}
 		else
 		{
 			fclose(fp);
 			g_Stripper.ApplyFileFilter(path);
-			Msg("[gmsv_stripper] Global filter rule applied: %s\n", path);
+			Msg("[Stripper Plugin] Global filter rule applied: %s\n", path);
+			AppliedFiles.push_back(path);
 		}
 
 		for (const char* pPart = map; *pPart++ != '\0';)
@@ -127,9 +129,10 @@ namespace StripperSupport {
 			{
 				fclose(fp);
 				g_Stripper.ApplyFileFilter(path);
-				Msg("[gmsv_stripper] Filter rule applied: %s\n", path);
+				Msg("[Stripper Plugin] Filter rule applied: %s\n", path);
+				AppliedFiles.push_back(path);
 			} else {
-				Msg("[gmsv_stripper] Could not find filter file: %s\n", path);
+				Msg("[Stripper Plugin] Could not find filter file: %s\n", path);
 			}
 		}
 

@@ -11,15 +11,15 @@
 
 #pragma once
 
+#include <string>
+#include <vector>
+
 #ifndef _INCLUDE_STRIPPER_INTERCOM_H_
 #define _INCLUDE_STRIPPER_INTERCOM_H_
 
 namespace StripperSupport {
-
-    extern const char* originalMapEntities;
-    extern const char* newMapEntities;
-
     extern const char* parse_map(const char* map, const char* entities);
+    extern std::vector<std::string> AppliedFiles;
 }
 
 #endif /* _INCLUDE_STRIPPER_INTERCOM_H_ */

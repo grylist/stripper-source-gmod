@@ -15,8 +15,8 @@
 #define _INCLUDE_STRIPPER_PROXY_H_
 
 namespace StripperProxy {
-    extern int Initialize();
-    extern int Deinitialize();
+    extern void Initialize();
+    extern void Deinitialize();
 };
 
 #endif /* _INCLUDE_STRIPPER_PROXY_H_ */
