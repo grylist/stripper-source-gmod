@@ -11,12 +11,7 @@
 
 #pragma once
 
-#ifndef _INCLUDE_STRIPPER_PROXY_H_
-#define _INCLUDE_STRIPPER_PROXY_H_
-
 namespace StripperProxy {
     extern void Initialize();
     extern void Deinitialize();
 };
-
-#endif /* _INCLUDE_STRIPPER_PROXY_H_ */

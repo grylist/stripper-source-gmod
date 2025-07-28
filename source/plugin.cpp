@@ -22,6 +22,7 @@ CServerPlugin ServerPlugin;
 EXPOSE_SINGLE_INTERFACE_GLOBALVAR(CServerPlugin, IServerPluginCallbacks, INTERFACEVERSION_ISERVERPLUGINCALLBACKS, ServerPlugin);
 
 IServerGameDLL *gamedll = nullptr;
+IVEngineServer *engine = nullptr;
 
 CON_COMMAND_F(stripper_status, "Checks stripper status", FCVAR_SERVER_CAN_EXECUTE)
 {
@@ -43,6 +44,8 @@ bool g_bPluginLoaded = false;
 bool g_bIgnoreNextUnLoad = false;
 bool CServerPlugin::Load(CreateInterfaceFn interfaceFactory, CreateInterfaceFn gameServerFactory)
 {
+    Msg("[Stripper Plugin] Loading\n");
+
     if (g_bPluginLoaded)
     {
         Msg("[Stripper Plugin] Plugin was told to be loaded while already being loaded, returning fail...\n");
@@ -55,6 +58,13 @@ bool CServerPlugin::Load(CreateInterfaceFn interfaceFactory, CreateInterfaceFn g
     if (gamedll == nullptr) 
 	{
         Msg("[Stripper Plugin] Failed to load required IServerGameDLL interface\n");
+		return false;
+    }
+
+    engine = InterfacePointers::VEngineServer();
+    if (engine == nullptr)
+    {
+        Msg("[Stripper Plugin] Failed to load required IVEngineServer interface\n");
 		return false;
     }
 

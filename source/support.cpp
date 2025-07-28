@@ -89,6 +89,7 @@ namespace StripperSupport {
 	}
 
 	Stripper g_Stripper;
+	const char* newMapEntities;
 	std::vector<std::string> AppliedFiles; // Stores all applied files
 
 	const char*

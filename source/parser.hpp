@@ -11,9 +11,6 @@
 
 #pragma once
 
-#ifndef _INCLUDE_STRIP_PARSER_H
-#define _INCLUDE_STRIP_PARSER_H
-
 #include <string>
 #include <list>
 #include <stack>
@@ -85,6 +82,3 @@ private:
     pcre *brk_re;
     pcre_extra *brk_re_extra;
 };
-
-#endif /* _INCLUDE_STRIP_PARSER_H */
-

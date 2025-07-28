@@ -11,11 +11,8 @@
 
 #pragma once
 
-#ifndef _INCLUDE_STRIPPER_MAIN_H_
-#define _INCLUDE_STRIPPER_MAIN_H_
-
 class IServerGameDLL;
+class IVEngineServer;
 
 extern IServerGameDLL *gamedll;
-
-#endif /* _INCLUDE_STRIPPER_MAIN_H_ */
+extern IVEngineServer *engine;

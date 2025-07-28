@@ -51,7 +51,7 @@ CreateWorkspace({name = "stripper"})
 		IncludeDetouring()
 		IncludeScanning()
 
-		links { "pcre" }
+		links { "pcre:static" }
 
 		filter("system:windows")
 			files({"source/win32/*.cpp", "source/win32/*.hpp"})
